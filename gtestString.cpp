@@ -106,3 +106,12 @@ TEST(TestString, substr)
     string strA = word.substr(0, len);
     EXPECT_EQ(strA, "blog");
 }
+
+TEST(TestString, relation)
+{
+    string word0 = "aa";
+    string word1 = "aaa";
+    string word2 = "aab";
+    EXPECT_EQ((word0 < word1), true);
+    EXPECT_EQ((word1 < word2), true);
+}
