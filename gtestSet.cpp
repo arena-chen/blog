@@ -19,18 +19,64 @@ protected:
     }
 };
 
-TEST_F(TestSet, initialize)
+TEST_F(TestSet, initIntArray)
 {
-    int currValues [] = { 1, 3, 5, 7 };
+    int currValues [] = { 3, 7, 5, 1 };
     set<int> currSet(currValues, currValues + 4);
     set<int>::iterator it;
 
     it = currSet.begin();
-    EXPECT_EQ(*it, 1);
+    EXPECT_EQ(*it++, 1);
+    EXPECT_EQ(*it++, 3);
+}
 
-    it++;
+TEST_F(TestSet, initCharArray)
+{
+    char currValues [] = { 'k', 'a', 'e', 'c' };
+    set<char> currSet(currValues, currValues + 4);
+    set<char>::iterator it;
 
-    EXPECT_EQ(*it, 3);
+    it = currSet.begin();
+    EXPECT_EQ(*it++, 'a');
+    EXPECT_EQ(*it++, 'c');
+}
+
+TEST_F(TestSet, initStringArray)
+{
+    string currValues [] = { "Ab", "A", "bd", "ba", "a", "ab" };
+    set<string> currSet(currValues, currValues + 6);
+    set<string>::iterator it;
+
+    it = currSet.begin();
+
+    EXPECT_EQ(*it++, "A");
+    EXPECT_EQ(*it++, "Ab");
+    EXPECT_EQ(*it++, "a");
+    EXPECT_EQ(*it++, "ab");
+    EXPECT_EQ(*it++, "ba");
+    EXPECT_EQ(*it++, "bd");
+}
+
+struct classcomp {
+  bool operator() (const string& lhs, const string& rhs) const
+  {return lhs>rhs;}
+};
+
+
+TEST_F(TestSet, initStringArrayComp)
+{
+    string currValues [] = { "Ab", "A", "bd", "ba", "a", "ab" };
+    set<string,classcomp> currSet(currValues, currValues + 6);
+    set<string>::iterator it;
+
+    it = currSet.begin();
+
+    EXPECT_EQ(*it++, "bd");
+    EXPECT_EQ(*it++, "ba");
+    EXPECT_EQ(*it++, "ab");
+    EXPECT_EQ(*it++, "a");
+    EXPECT_EQ(*it++, "Ab");
+    EXPECT_EQ(*it++, "A");
 }
 
 TEST_F(TestSet, begin)
@@ -38,11 +84,8 @@ TEST_F(TestSet, begin)
     set<int>::iterator it;
 
     it = allValues.begin();
-    EXPECT_EQ(*it, 11);
-
-    it++;
-
-    EXPECT_EQ(*it, 22);
+    EXPECT_EQ(*it++, 11);
+    EXPECT_EQ(*it++, 22);
 }
 
 TEST_F(TestSet, find)
@@ -58,4 +101,10 @@ TEST_F(TestSet, insert)
     allValues.insert(6);
 
     EXPECT_EQ(*allValues.find(6), 6);
+}
+
+TEST_F(TestSet, count)
+{
+    EXPECT_EQ(allValues.count(22), 1);
+    EXPECT_EQ(allValues.count(6), 0);
 }
