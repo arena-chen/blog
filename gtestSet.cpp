@@ -57,16 +57,18 @@ TEST_F(TestSet, initStringArray)
     EXPECT_EQ(*it++, "bd");
 }
 
-struct classcomp {
-  bool operator() (const string& lhs, const string& rhs) const
-  {return lhs>rhs;}
+struct stringComp
+{
+    bool operator() (const string& lhs, const string& rhs) const
+    {
+        return lhs > rhs;
+    }
 };
-
 
 TEST_F(TestSet, initStringArrayComp)
 {
     string currValues [] = { "Ab", "A", "bd", "ba", "a", "ab" };
-    set<string,classcomp> currSet(currValues, currValues + 6);
+    set<string,stringComp> currSet(currValues, currValues + 6);
     set<string>::iterator it;
 
     it = currSet.begin();

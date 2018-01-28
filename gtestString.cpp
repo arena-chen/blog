@@ -112,6 +112,9 @@ TEST(TestString, relation)
     string word0 = "aa";
     string word1 = "aaa";
     string word2 = "aab";
+    EXPECT_EQ((word0 >= "aa"), true);
+    EXPECT_EQ((word0 == "aa"), true);
     EXPECT_EQ((word0 < word1), true);
+    EXPECT_EQ((word1 > word0), true);
     EXPECT_EQ((word1 < word2), true);
 }
