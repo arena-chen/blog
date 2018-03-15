@@ -20,6 +20,31 @@ protected:
     }
 };
 
+TEST_F(TestVector, init_all_elements_with_value)
+{
+    vector<int> vec;
+    int num = 3;
+    int val = 7;
+
+    vec = vector<int> (num, val);
+
+    EXPECT_EQ(vec[0], val);
+    EXPECT_EQ(vec[1], val);
+    EXPECT_EQ(vec[2], val);
+}
+
+TEST_F(TestVector, init_with_array)
+{
+    int values [] = { 1, 2, 3 };
+
+    vector<int> vec;
+    vec = vector<int> (values, values + 3);
+
+    EXPECT_EQ(vec[0], 1);
+    EXPECT_EQ(vec[1], 2);
+    EXPECT_EQ(vec[2], 3);
+}
+
 TEST_F(TestVector, push_back)
 {
     currVector.push_back(4);
