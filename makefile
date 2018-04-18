@@ -14,9 +14,12 @@ map:
 set:
 	$(CC) -o testSet.exe gtestSet.cpp $(GTEST_DIR:%=-I%) $(GTEST_LIB) -lpthread -std=c++11
 
-all: string vector map set
+queue:
+	$(CC) -o testQueue.exe gtestQueue.cpp $(GTEST_DIR:%=-I%) $(GTEST_LIB) -lpthread -std=c++11
+
+all: string vector map set queue
 
 clean:
 	rm *.exe
 
-.PHONY : all string vector map set
+.PHONY : all string vector map set queue
